@@ -9,6 +9,7 @@ use App\Models\GoodbyeCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Inertia\Inertia;
 
 class GoodbyeCardController extends Controller
 {
@@ -23,13 +24,13 @@ class GoodbyeCardController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGoodbyeCardRequest $request): JsonResponse
+    public function store(StoreGoodbyeCardRequest $request)
     {
         $payload = $request->validated();
 
         if ($request->hasFile('asset_file') && $request->file('asset_file')->isValid()) {
         // store the uploaded file and get the path
-        $assetPath = $request->file('asset_file')->store(storage_path('app/public/goodbye-cards'));
+        $assetPath = $request->file('asset_file')->store(public_path('goodbye-cards'));
 
         $assetPath = 'goodbye-cards/' . basename($assetPath);
 
@@ -38,7 +39,9 @@ class GoodbyeCardController extends Controller
         }
         GoodbyeCard::create($payload);
 
-        return response()->json(['message' => 'Goodbye card created successfully']);
+        return Inertia::render('Welcome', [
+            'goodbyeCards' => GoodbyeCard::all()
+        ]);
     }
 
     /**
