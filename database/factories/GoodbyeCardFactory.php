@@ -25,9 +25,9 @@ class GoodbyeCardFactory extends Factory
             $assetType = $this->faker->randomElement(['image', 'video']);
 
             if ($assetType === 'image') {
-                $assetPath = $this->faker->image(public_path('goodbye-cards'),);
+                $assetPath = $this->faker->image(public_path('images/goodbye-cards'),);
 
-                $assetPath = 'goodbye-cards/' . (pathinfo($assetPath, PATHINFO_BASENAME));
+                $assetPath = 'images/goodbye-cards/' . (pathinfo($assetPath, PATHINFO_BASENAME));
             } else {
                 $assetPath = $this->faker->url();
             }

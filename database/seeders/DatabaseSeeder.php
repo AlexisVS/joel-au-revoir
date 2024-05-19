@@ -16,16 +16,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if (env('APP_ENV') === 'development') {
-            if (file_exists(public_path('goodbye-cards'))) {
-                File::deleteDirectory(public_path('goodbye-cards'));
+            if (file_exists(public_path('images/goodbye-cards'))) {
+                File::deleteDirectory(public_path('images/goodbye-cards'));
             }
-            File::makeDirectory(public_path('goodbye-cards'));
+            File::makeDirectory(
+                path: public_path('images/goodbye-cards'),
+                recursive: true
+            );
 
 
             GoodbyeCard::factory(100)->create();
         } else {
-            if (!file_exists(public_path('goodbye-cards'))) {
-                File::makeDirectory(public_path('goodbye-cards'));
+            if (!file_exists(public_path('images/goodbye-cards'))) {
+                File::makeDirectory(
+                    path: public_path('images/goodbye-cards'),
+                    recursive: true
+                );
             }
         }
     }

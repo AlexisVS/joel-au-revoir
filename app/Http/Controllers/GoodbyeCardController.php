@@ -30,7 +30,7 @@ class GoodbyeCardController extends Controller
 
         if ($request->hasFile('asset_file') && $request->file('asset_file')->isValid()) {
         // store the uploaded file and get the path
-        $assetPath = $request->file('asset_file')->store(public_path('goodbye-cards'));
+        $assetPath = $request->file('asset_file')->store(public_path('images/goodbye-cards'));
 
         $assetPath = 'goodbye-cards/' . basename($assetPath);
 
